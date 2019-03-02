@@ -81,7 +81,7 @@ function Example() {
       })}
       <h3>USE EFFECT</h3>
       <p className="btn" onClick={handleDisplay}>Toggle Display</p>
-      <Display display={display} counter={counter}/>
+      {display && <Display counter={counter}/>}
     </div>
   );
 }
@@ -91,9 +91,12 @@ function Display(props) {
   useEffect(() => {
     console.log('tick');
 
-  })
+    return () => {
+      console.log('cleanUp')
+    }
+  }, []) 
+  // empty Array [] workd only on component didMount and willUnmount
 
-  if(props.display){
     return (
       <div>
         <p>
@@ -101,8 +104,5 @@ function Display(props) {
         </p>
       </div>
     );
-  }
-  else {
-    return null
-  }
+  
 }
