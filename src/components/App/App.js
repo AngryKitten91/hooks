@@ -38,6 +38,9 @@ function Example() {
   const [counter, setCount] = useState(0);
   const [todos, setTodos] = useState(['item1']);
   const [input, setInput] = useState('');
+  const [display, setDiaplay] = useState(true);
+
+
 
   const add = () => setCount(counter + 1)
   const subtract = () => setCount(counter - 1)
@@ -51,6 +54,10 @@ function Example() {
 
   const handleInput= (e) =>{
     setInput(e.target.value)
+  }
+
+  const handleDisplay= () => {
+    setDiaplay(!display)
   }
 
   return (
@@ -69,9 +76,33 @@ function Example() {
       <p className="btn" onClick={() => {
         addTodo(input)
       }}>Add Item</p>
-      {todos.map(elem => {
-        return <div>{elem}</div>
+      {todos.map((elem, id) => {
+        return <div key={id}>{elem}</div>
       })}
+      <h3>USE EFFECT</h3>
+      <p className="btn" onClick={handleDisplay}>Toggle Display</p>
+      <Display display={display} counter={counter}/>
     </div>
   );
+}
+
+function Display(props) {
+
+  useEffect(() => {
+    console.log('tick');
+
+  })
+
+  if(props.display){
+    return (
+      <div>
+        <p>
+        I'm displayed || counter: {props.counter}
+        </p>
+      </div>
+    );
+  }
+  else {
+    return null
+  }
 }
