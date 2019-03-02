@@ -3,9 +3,29 @@ import React, { Component, useState, useEffect } from 'react';
 import './App.css';
 
 export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+
+  handleAdd = () => {
+    this.setState((prev) => {
+      return {
+        count: prev.count + 1
+      }
+    })
+  }
   render() {
+    const { count } = this.state;
     return (
       <div className="App">
+        <h3>Class state</h3>
+        <div>You clicked {count} times</div>
+        <div onClick={this.handleAdd}>Add</div>
+        <h3>Function state</h3>
         <Example />
       </div>
     );
@@ -14,15 +34,15 @@ export default class App extends Component {
 
 
 function Example() {
-  // Declare a new state variable, which we'll call "count"
+  
   const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <p onClick={() => setCount(count + 1)}>
+        Add
+      </p>
     </div>
   );
 }
