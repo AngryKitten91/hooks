@@ -24,7 +24,7 @@ export default class App extends Component {
       <div className="App">
         <h3>Class state</h3>
         <p>You clicked {count} times</p>
-        <p onClick={this.handleAdd}>Add</p>
+        <p className="btn" onClick={this.handleAdd}>Add</p>
         <h3>Function state</h3>
         <Example />
       </div>
@@ -36,28 +36,38 @@ export default class App extends Component {
 function Example() {
   
   const [counter, setCount] = useState(0);
-
   const [todos, setTodos] = useState(['item1']);
+  const [input, setInput] = useState('');
 
   const add = () => setCount(counter + 1)
   const subtract = () => setCount(counter - 1)
 
   const addTodo = (item) =>{
-    setTodos([...todos, item])
+    if(item !== ''){
+      setTodos([...todos, item])
+      setInput('')
+    }
+  }
+
+  const handleInput= (e) =>{
+    setInput(e.target.value)
   }
 
   return (
     <div>
       <p>You clicked {counter} times</p>
-      <p onClick={add}>
+      <p className="btn" onClick={add}>
         Add
       </p>
-      <p onClick={subtract}>
+      <p className="btn" onClick={subtract}>
         Subtract
       </p>
       <h3>TODOS</h3>
-      <p onClick={()=>{
-        addTodo("item2")
+      
+      <input value={input} onChange={handleInput}></input>
+
+      <p className="btn" onClick={() => {
+        addTodo(input)
       }}>Add Item</p>
       {todos.map(elem => {
         return <div>{elem}</div>

@@ -3,3 +3,16 @@
   width: 1200px;
   margin: 0 auto;
 }
+
+.btn {
+  padding:20px;
+  margin: 10px 0;
+  background-color: rgb(219, 219, 219);
+  border-radius: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
